@@ -1,0 +1,28 @@
+Table users as U {
+  id int [pk, increment]
+  name varchar(50) [not null]
+  email varchar(100) [not null, unique]
+  password varchar(100) [not null]
+  created_at timestamp [default: `now()`]
+}
+
+Table event as E {
+  id int [pk, increment]
+  title varchar(100)
+  description TEXT
+  start_time timestamp [not null]
+  end_time timestamp
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+  user_id int [ref: > U.id, not null]
+}
+
+Table time_entry as TE {
+  id int [pk, increment]
+  start_time timestamp [default: `now()`]
+  end_time timestamp [not null]
+  duration interval [not null]
+  user_id int [ref: > U.id]
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+}
