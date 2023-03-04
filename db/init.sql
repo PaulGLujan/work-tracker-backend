@@ -30,5 +30,17 @@ create table time_entry (
   constraint fk_user_id_time_entry foreign key (user_id) references users (id)
 );
 
+CREATE OR REPLACE FUNCTION calculate_duration() RETURNS TRIGGER AS $$
+BEGIN
+  NEW.duration := EXTRACT(epoch FROM (NEW.end_time - NEW.start_time))::integer;
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER update_duration
+BEFORE INSERT OR UPDATE ON time_entry
+FOR EACH ROW
+EXECUTE FUNCTION calculate_duration();
+
 INSERT INTO users (name, email, password)
 VALUES ('Paul Lujan', 'paulglujan@gmail.com', 'test');
