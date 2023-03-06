@@ -4,6 +4,7 @@ import { getAlertTimesByDuration, getNextQuarterHour } from "./utils/time";
 import bodyParser from "body-parser";
 import timeEntryRouter from "./routes/timeEntryRoutes";
 import appointmentRouter from "./routes/appointmentRoutes";
+import convertResponseToCamelCase from "./middlewares/convertResponseToCamelCase";
 
 dotenv.config();
 
@@ -12,6 +13,7 @@ const port = process.env.PORT;
 
 // Middleware
 app.use(bodyParser.json());
+app.use(convertResponseToCamelCase);
 
 // Routers
 app.use("/timeentry", timeEntryRouter);
