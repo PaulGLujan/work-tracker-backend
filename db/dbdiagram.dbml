@@ -6,7 +6,7 @@ Table users as U {
   created_at timestamp [default: `now()`]
 }
 
-Table event as E {
+Table Appointment as E {
   id int [pk, increment]
   title varchar(100)
   description TEXT

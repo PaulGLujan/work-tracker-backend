@@ -7,7 +7,7 @@ create table users (
   updated_at timestamp default now()
 );
 
-create table event (
+create table appointment (
   id serial primary key,
   title varchar(100),
   description text,
@@ -16,7 +16,7 @@ create table event (
   created_at timestamp default now(),
   updated_at timestamp default now(),
   user_id int,
-  constraint fk_user_id_event foreign key (user_id) references users (id)
+  constraint fk_user_id_appointment foreign key (user_id) references users (id)
 );
 
 create table time_entry (

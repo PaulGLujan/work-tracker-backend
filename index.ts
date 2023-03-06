@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import { getAlertTimesByDuration, getNextQuarterHour } from "./utils/time";
 import bodyParser from "body-parser";
 import timeEntryRouter from "./routes/timeEntryRoutes";
+import appointmentRouter from "./routes/appointmentRoutes";
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 
 // Routers
 app.use("/timeentry", timeEntryRouter);
+app.use("/appointment", appointmentRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
