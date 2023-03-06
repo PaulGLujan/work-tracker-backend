@@ -2,7 +2,6 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { getAlertTimesByDuration, getNextQuarterHour } from "./utils/time";
 import bodyParser from "body-parser";
-import { pool } from "./db";
 import timeEntryRouter from "./routes/timeEntryRoutes";
 
 dotenv.config();
@@ -18,16 +17,6 @@ app.use("/timeentry", timeEntryRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Express + TypeScript Server");
-});
-
-app.get("/users", async (req: Request, res: Response) => {
-  try {
-    const result = await pool.query("select * from users");
-    res.send(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Error retrieving users from database");
-  }
 });
 
 app.get("/alertTimes/:startTime/:duration", (req: Request, res: Response) => {
