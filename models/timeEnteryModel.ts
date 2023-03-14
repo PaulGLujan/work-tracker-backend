@@ -7,7 +7,7 @@ export interface CreateTimeEntry {
 export interface TimeEntry extends CreateTimeEntry {
   id: number;
   duration: {
-    minutes: "number";
+    minutes: number;
   };
   createdAt: Date;
   updatedAt: Date;
